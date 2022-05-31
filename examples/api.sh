@@ -1,0 +1,1 @@
+curl https://0m245g1iv6.execute-api.us-west-2.amazonaws.com/development/messages -d'{"customer": "RF-TEST-Sd-Office", "dbuser": "rf_test_sd_office_ro","dbpassword": "58mf2DjSZcL367zU","start_time": "2021-12-08 00:00:00.000","end_time": "2021-12-09 00:00:00.000"}' -H 'Content-Type: application/json'
