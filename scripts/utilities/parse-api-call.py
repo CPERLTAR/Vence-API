@@ -48,11 +48,11 @@ print(json_end_date_datetime)
 
 # TODO I can specify the date input as a sys.arg to accept inputs from the command line interface
 # specify your start time here in the format Year,Month,Day,Hour,Minute,Seconds,Microseconds
-my_start_date_datetime = datetime.datetime(2022, 4, 4, 0, 0, 0, 000)
+my_start_date_datetime = datetime.datetime(2022, 4, 3, 12, 0, 0, 000)
 print(my_start_date_datetime)
 
 # specify your end time here in the format Year,Month,Day,Hour,Minute,Second(s,Microseconds
-my_end_date_datetime = datetime.datetime(2022, 4, 8, 0, 0, 0, 000)
+my_end_date_datetime = datetime.datetime(2022, 4, 4, 0, 0, 0, 000)
 print(my_end_date_datetime)
 
 # compare the difference in time between the start and end dates
@@ -234,11 +234,16 @@ for i in range(len(dates_to_call) - window_size + 1):
     # tis object will be used to test if the type is a re.match or none (not a match)
     missing_dates = []
 
-    # search for dates in the message list that are missing a field such as the microseconds field
+    # search for dates in the message list that are missing the microseconds field
     # this regular expression may need to change if the inputs are different
     # this for loop tells you which dates are missing a field based on regular expression match
+
     for i in range(len(message_list)):
         missing_dates.append(re.search("datetime.datetime\(\d*,\d*,\d*,\d*,\d*,\d*\)", message_list[i]))
+
+    # search for dates in the message list that are missing the seconds field and the microseconds field
+    for i in range(len(message_list)):
+        missing_dates.append(re.search("datetime.datetime\(\d*,\d*,\d*,\d*,\d*\)", message_list[i]))
 
     # intialize and empty list to store the messages that are missing a date field
     offending_messages = []
@@ -270,7 +275,7 @@ for i in range(len(dates_to_call) - window_size + 1):
     for i in range(len(offending_messages)):
         message_list[offending_messages_index[i]] = offending_messages_add_zeros[i]
 
-    # reintialize an empty lisit to overwrite the list with the bad date
+    # reinitialize an empty list to overwrite the list with the bad date
     regex_search = []
 
     # rerun the error message to check if our solution worked
@@ -289,7 +294,7 @@ for i in range(len(dates_to_call) - window_size + 1):
     # check the output in the console
     print(regex_search)
 
-    # intialize an empty list to store the unevaluated date expressions
+    # initialize an empty list to store the unevaluated date expressions
     date_expressions = []
     # TODO this breaks when then seconds parameter is missing, I fixed it for microseconds
     # extract just the date expression from the
