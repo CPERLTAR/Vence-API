@@ -23,7 +23,7 @@ headers["Content-Type"] = "application/json"
 
 # read in the configuration JSON from the project directory
 # this is read in as a dictionary
-with open('json/config.json') as file:
+with open('config/config.json') as file:
     json_config_dict = json.load(file)
 
 # use the dict to interate through the start time and end time
@@ -48,11 +48,11 @@ print(json_end_date_datetime)
 
 # TODO I can specify the date input as a sys.arg to accept inputs from the command line interface
 # specify your start time here in the format Year,Month,Day,Hour,Minute,Seconds,Microseconds
-my_start_date_datetime = datetime.datetime(2022, 4, 3, 12, 0, 0, 000)
+my_start_date_datetime = datetime.datetime(2022, 4, 12, 12, 0, 0, 000)
 print(my_start_date_datetime)
 
 # specify your end time here in the format Year,Month,Day,Hour,Minute,Second(s,Microseconds
-my_end_date_datetime = datetime.datetime(2022, 4, 4, 0, 0, 0, 000)
+my_end_date_datetime = datetime.datetime(2022, 4, 30, 0, 0, 0, 000)
 print(my_end_date_datetime)
 
 # compare the difference in time between the start and end dates
