@@ -2,6 +2,7 @@
 # python -m pip install requests
 
 # load required libraries
+import os
 import sys
 import re
 import warnings
@@ -48,11 +49,11 @@ print(json_end_date_datetime)
 
 # TODO I can specify the date input as a sys.arg to accept inputs from the command line interface
 # specify your start time here in the format Year,Month,Day,Hour,Minute,Seconds,Microseconds
-my_start_date_datetime = datetime.datetime(2022, 4, 12, 12, 0, 0, 000)
+my_start_date_datetime = datetime.datetime(2022, 4, 2, 0, 0, 0, 000)
 print(my_start_date_datetime)
 
 # specify your end time here in the format Year,Month,Day,Hour,Minute,Second(s,Microseconds
-my_end_date_datetime = datetime.datetime(2022, 4, 30, 0, 0, 0, 000)
+my_end_date_datetime = datetime.datetime(2022, 4, 3, 0, 0, 0, 000)
 print(my_end_date_datetime)
 
 # compare the difference in time between the start and end dates
@@ -637,7 +638,19 @@ print(my_end_date_datetime)
 # concatenate strings to create a flexible filename
 filename = "data/" + my_start_date_filename + "_" + my_end_date_datetime + "_Vence-message-data" + ".csv"
 
-# print in the console to check the filename string
+# check if the "data" directory exists,
+# if it does not, create new directory
+cwd = os.getcwd()
+
+path = os.path.join(cwd, "data")
+
+if not os.path.isdir(path):
+    try:
+        os.mkdir(path)
+    except OSError as error:
+        print(error)
+
+    # print in the console to check the filename string
 print(filename)
 
 # write out the data frame as a csv file using the flexible filename convention
