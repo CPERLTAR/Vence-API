@@ -13,8 +13,6 @@ import datetime
 import pandas as pd
 import json
 
-# TODO remove all printing except for error messages and which dates are currently running
-
 # store the URL of the API in a object
 url = "https://5rxy4xetnd.execute-api.us-west-2.amazonaws.com/production/messages"
 
@@ -31,49 +29,34 @@ with open('config/config.json') as file:
 # index the dictionary to get the start time inside of the json file
 # we will leave the start time unchanged in the JSON file and change the date inside of Python
 json_start_date_string = json_config_dict['start_time']
-# print(json_start_date_string)
 
 # do the same for the end date inside of the json file
 json_end_date_string = json_config_dict['end_time']
-# print(json_end_date_string)
 
 # convert the start date string into a datetime object
 json_start_date_datetime = datetime.datetime.strptime(json_start_date_string, '%Y-%m-%d %H:%M:%S.%f')
-# print(json_start_date_datetime)
 
 # convert the end date string into a datetime object
 json_end_date_datetime = datetime.datetime.strptime(json_end_date_string, '%Y-%m-%d %H:%M:%S.%f')
-# print(json_end_date_datetime)
 
 # TODO I can specify the date input as a sys.arg to accept inputs from the command line interface
 
 # compare the difference in time between the start and end dates
 time_difference_days = (json_end_date_datetime - json_start_date_datetime).days
-# print the total time difference (in days) between the start and end dates
-# print(time_difference_days)
 
 # need to split the time delta into 12 hours chunks to be safe (avoid timeout)
 # json_end_date_datetime
 
 time_delta = datetime.timedelta(days = 0.5)
 
-# print(time_delta)
-
-# print(json_start_date_datetime + time_delta)
-
 # initialize an empty list to store our list of dates to feed to the API
-dates_to_call = []
-
-# print(dates_to_call)
+dates_to_call = [json_start_date_datetime]
 
 date = json_start_date_datetime
 
 while(date < json_end_date_datetime):
     date = date + time_delta
     dates_to_call.append(date)
-
-# note that this list stores each element as a datetime
-# print(dates_to_call)
 
 # initialize an empty pandas data frame
 all_data = pd.DataFrame()
@@ -99,7 +82,6 @@ for i in range(len(dates_to_call) - window_size + 1):
 
     # assign in the new start and end dates to the json converted to dictionary
     json_config_dict['start_time'] = start_date_string
-    # print(json_config_dict['start_time'])
 
     # grab the first intermediate end date from the list
     intermediate_date_datetime = dates_to_call[i: i + window_size][1]
@@ -119,20 +101,15 @@ for i in range(len(dates_to_call) - window_size + 1):
     if response.status_code != 200:
         sys.exit(("Error: HTTP Response" + " " + str(response.status_code) + " " + response.reason))
 
-    # print(response.status_code)
-
-    # print(response.text)
+    # informative response status code would be helpful for diagnosing server issues
+    print('HTTP Status Code: ' + str(response.status_code) + ' ' + response.reason)
 
     # check the character encoding of the API response
     # it should be in utf-8
-    # print(response.encoding)
 
     # index the response variable to get the "content" of the response
     # the response text will work better than response content
     message_text = response.text
-
-    # check the output in the console
-    # print(message_text)
 
     # drop the first and last characters from the message so string splitting will create symmetrical messages
     # first we need to know the length of the message (i.e., number of characters) to create an index
@@ -143,56 +120,29 @@ for i in range(len(dates_to_call) - window_size + 1):
     if message_length <= 3:
         sys.exit("Error: Empty Response from Server")
 
-    # check the output in the console
-    # print(message_length)
-
     # TODO instead of creating new variables when cleaning up the message string, just overwrite the message string
 
     # drop the last character of the message which is an extra right brace "]"
     # this is just an extra unnecessary character
     message_text_drop_last_char = message_text[0:(message_length - 1)]
 
-    # if it worked correctly you should see a parenthesis character instead of a brace character
-    # print(message_text_drop_last_char[-1])
-
-    # print(message_text_drop_last_char)
-    # print(message_text)
-
     # drop the first character of the message which is an extra left brace "["
     # this is just an extra unnecessary character
     message_text_drop_first_char = message_text_drop_last_char[1:]
 
-    # if it worked correctly you should see a parenthesis character instead of a brace character
-    # print(message_text_drop_first_char[0])
-
     # drop the empty space characters too
     message_text_drop_empty_spaces = str.replace(message_text_drop_first_char, " ", "")
-
-    # print the output in the console to check if it was successful
-    # there shouldn't be any spaces between characters
-    # print(message_text_drop_empty_spaces)
 
     # the message text also has apostrophe characters that we need to drop
     # these characters are leftovers from the message data
     message_text_drop_apostrophe_char = str.replace(message_text_drop_empty_spaces, "'", "")
 
-    # print the message text after we dropped the apostrophes to see if if worked
-    # print(message_text_drop_apostrophe_char)
-
     # drop the extra brace characters too
     message_text_drop_left_brace_char = str.replace(message_text_drop_apostrophe_char, "[", "")
-
-    # if it worked correctly you should no longer see a left brace character alongside "sequenceNumber"
-    # print(message_text_drop_left_brace_char)
 
     # there are actually two message types returned from the beta API
     # split the message response into two separate messages on a specific combination of characters
     message_list = message_text_drop_left_brace_char.split(sep="]),")
-
-    # print the messages and their indexes to check if each message was string split properly
-    # there should be no extra characters at the beginning or end of each string
-    # for index, value in enumerate(message_list):
-    #     print(index, value)
 
     # search for dates that are missing the seconds field
     # intialize an empty list to store if the date in each message is a match to the regex
@@ -214,9 +164,6 @@ for i in range(len(dates_to_call) - window_size + 1):
             messages_missing_seconds_index.append(int(i))
             print('This message is missing seconds: (index number = ' + str(i) + ')')
 
-    # these are the offending messages
-    # print(messages_missing_seconds)
-
     # intialize an empty list to store the offending messages that have zeros added
     # the zeros are so that when we go to evaluate the date expression
     # it doesn't fail because their are uneven number of inputs
@@ -227,12 +174,9 @@ for i in range(len(dates_to_call) - window_size + 1):
     for i in range(len(messages_missing_seconds)):
         offending_messages_add_seconds.append(re.sub(pattern="\)", repl=",00)", string=messages_missing_seconds[i]))
 
-    # print(offending_messages_add_seconds)
-
     # this uses the index of the messages missing seconds to replace the messages in the orginal data
     for i in range(len(messages_missing_seconds)):
         message_list[messages_missing_seconds_index[i]] = offending_messages_add_seconds[i]
-        # print(message_list[messages_missing_seconds_index[i]])
 
     # search for dates that are missing the microseconds field
     # intialize an empty list to store if the date in each message is a match to the regex
@@ -266,12 +210,9 @@ for i in range(len(dates_to_call) - window_size + 1):
     for i in range(len(messages_missing_microseconds)):
         offending_messages_add_microseconds.append(re.sub(pattern="\)", repl=",00000)", string=messages_missing_microseconds[i]))
 
-    # print(offending_messages_add_microseconds)
-
     # this uses the index of the messages missing seconds to replace the messages in the orginal data
     for i in range(len(messages_missing_microseconds)):
         message_list[messages_missing_microseconds_index[i]] = offending_messages_add_microseconds[i]
-        # print(message_list[messages_missing_microseconds_index[i]])
 
     # double check that the messages are not missing any date values
     # intialize an empty list to store the data
@@ -290,7 +231,6 @@ for i in range(len(dates_to_call) - window_size + 1):
             warnings.warn('Not a match: (index number = ' + str(i) + ')' + ' ' + message_list[i])
             offending_message = message_list[i]
             index = int(i)
-            # print the offending message
             print(offending_message)
             break
 
@@ -300,10 +240,6 @@ for i in range(len(dates_to_call) - window_size + 1):
     # extract just the date expression from the
     for i in range(len(regex_search)):
         date_expressions.append(regex_search[i].group())
-
-    # check the output in the console
-    # there should only be unevaluated Python expressions in this list
-    # print(date_expressions)
 
     # check that the length of the date list matches the length of the message list
     len(date_expressions)
@@ -328,10 +264,6 @@ for i in range(len(dates_to_call) - window_size + 1):
     for i in range(len(date_expressions)):
         date_time_object = (eval(date_expressions[i]))
         isodate_list.append(date_time_object.isoformat())
-
-    # check the output in the console to see if the dates were converted properly
-    # there should a list of date strings similar to "2021-12-01T00:26:33.477000"
-    # print(isodate_list)
 
     # initialize an empty list for the cleaned dates
     message_list_cleaned_dates = []
@@ -365,8 +297,6 @@ for i in range(len(dates_to_call) - window_size + 1):
         message_split = (message_list_cleaned_dates[i].split(sep=","))
         message_list_split.append(message_split)
 
-    # print(message_list_split)
-
     # initialize empty lists to store each of the message types
     GpsLocationExtIndication = []
     GpsLocationExtIndicationCowHeading = []
@@ -384,11 +314,6 @@ for i in range(len(dates_to_call) - window_size + 1):
             ShockEventExtIndication.append(element)
         elif len(element) == 27:
             DeviceStatusIndication.append(element)
-
-    # print(GpsLocationExtIndication)
-    # print(GpsLocationExtIndicationCowHeading)
-    # print(ShockEventExtIndication)
-    # print(DeviceStatusIndication)
 
     location_extent_df = pd.DataFrame(GpsLocationExtIndication,
                                       columns=['uuid',
@@ -607,10 +532,6 @@ for i in range(len(dates_to_call) - window_size + 1):
     # the very last sequence=false has a couple extra characters that we need to remove
     reindex_combined_df.sequence = reindex_combined_df.sequence.str.replace("])", "", regex=False)
 
-    # check that the extra characters were removed from the last row of the sequence column
-    # printing to console should be "true" or "false" without any additional characters if this worked
-    # print(reindex_combined_df.sequence.iloc[-1])
-
     # add the index column name back in
     reindex_combined_df.index.name = "index"
 
@@ -629,10 +550,9 @@ for i in range(len(dates_to_call) - window_size + 1):
 # create a filename based on the date range you specified for the HTTP request
 # convert the datetime object to a string but use a more friendly format for filenames
 start_date_filename = json_start_date_datetime.strftime("%Y-%m-%d")
-# print(my_start_date_filename)
+
 
 end_date_filename = json_end_date_datetime.strftime("%Y-%m-%d")
-# print(end_date_filename)
 
 # concatenate strings to create a flexible filename
 filename = "data/" + start_date_filename + "_" + end_date_filename + "_Vence-message-data" + ".csv"
@@ -649,7 +569,7 @@ if not os.path.isdir(path):
     except OSError as error:
         print(error)
 
-    # print in the console to check the filename string
+# print in the console to check the filename string
 print(filename)
 
 # write out the data frame as a csv file using the flexible filename convention
