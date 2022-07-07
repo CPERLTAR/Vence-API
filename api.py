@@ -195,6 +195,86 @@ for i in range(len(dates_to_call) - window_size + 1):
     for index, value in enumerate(message_list):
         print(index, value)
 
+    # search for dates that are missing the seconds field
+    # intialize an empty list to store if the date in each message is a match to the regex
+    # this object will be used to test if the type is a re.match or none (not a match)
+    missing_seconds = []
+
+    # search for dates in the message list that are missing the seconds field and the microseconds field
+    for i in range(len(message_list)):
+        missing_seconds.append(re.search("datetime.datetime\(\d*,\d*,\d*,\d*,\d*\)", message_list[i]))
+
+    # initialize and empty list to store the messages that are missing a date field
+    messages_missing_seconds = []
+    messages_missing_seconds_index = []
+
+    # this for loop will tell you which messages are missing a date by their index
+    for i in range(len(missing_seconds)):
+        if type(missing_seconds[i]) == re.Match:
+            messages_missing_seconds.append(message_list[i])
+            messages_missing_seconds_index.append(int(i))
+            print('This message is missing seconds: (index number = ' + str(i) + ')')
+
+    # these are the offending messages
+    print(messages_missing_seconds)
+
+    # intialize an empty list to store the offending messages that have zeros added
+    # the zeros are so that when we go to evaluate the date expression
+    # it doesn't fail because their are uneven number of inputs
+    # dates that are missing a field have 6 inputs
+    # dates that aren't missing a field have 7 inputs
+    offending_messages_add_seconds = []
+
+    for i in range(len(messages_missing_seconds)):
+        offending_messages_add_seconds.append(re.sub(pattern="\)", repl=",00)", string=messages_missing_seconds[i]))
+
+    print(offending_messages_add_seconds)
+
+    # this uses the index of the messages missing seconds to replace the messages in the orginal data
+    for i in range(len(messages_missing_seconds)):
+        message_list[messages_missing_seconds_index[i]] = offending_messages_add_seconds[i]
+        print(message_list[messages_missing_seconds_index[i]])
+
+    # search for dates that are missing the microseconds field
+    # intialize an empty list to store if the date in each message is a match to the regex
+    # this object will be used to test if the type is a re.match or none (not a match)
+    missing_microseconds = []
+
+    # search for dates in the message list that are missing the microseconds field
+    # this regular expression may need to change if the inputs are different
+    # this for loop tells you which dates are missing a field based on regular expression match
+    for i in range(len(message_list)):
+        missing_microseconds.append(re.search("datetime.datetime\(\d*,\d*,\d*,\d*,\d*,\d*\)", message_list[i]))
+
+    # initialize and empty list to store the messages that are missing a date field
+    messages_missing_microseconds = []
+    messages_missing_microseconds_index = []
+
+    # this for loop will tell you which messages are missing a date by their index
+    for i in range(len(missing_microseconds)):
+        if type(missing_microseconds[i]) == re.Match:
+            messages_missing_microseconds.append(message_list[i])
+            messages_missing_microseconds_index.append(int(i))
+            print('This message is missing microseconds: (index number = ' + str(i) + ')')
+
+    # intialize an empty list to store the offending messages that have zeros added
+    # the zeros are so that when we go to evaluate the date expression
+    # it doesn't fail because their are uneven number of inputs
+    # dates that are missing a field have 6 inputs
+    # dates that aren't missing a field have 7 inputs
+    offending_messages_add_microseconds = []
+
+    for i in range(len(messages_missing_microseconds)):
+        offending_messages_add_microseconds.append(re.sub(pattern="\)", repl=",00000)", string=messages_missing_microseconds[i]))
+
+    print(offending_messages_add_microseconds)
+
+    # this uses the index of the messages missing seconds to replace the messages in the orginal data
+    for i in range(len(messages_missing_microseconds)):
+        message_list[messages_missing_microseconds_index[i]] = offending_messages_add_microseconds[i]
+        print(message_list[messages_missing_microseconds_index[i]])
+
+    # double check that the messages are not missing any date values
     # intialize an empty list to store the data
     regex_search = []
 
@@ -214,73 +294,6 @@ for i in range(len(dates_to_call) - window_size + 1):
             # print the offending message
             print(offending_message)
             break
-
-    # you can also access the offending message by indexing the message list
-    message_list[index]
-
-    # intialize an empty list to store if the date in each message is a match to the regex
-    # tis object will be used to test if the type is a re.match or none (not a match)
-    missing_dates = []
-
-    # search for dates in the message list that are missing the microseconds field
-    # this regular expression may need to change if the inputs are different
-    # this for loop tells you which dates are missing a field based on regular expression match
-
-    for i in range(len(message_list)):
-        missing_dates.append(re.search("datetime.datetime\(\d*,\d*,\d*,\d*,\d*,\d*\)", message_list[i]))
-
-    # search for dates in the message list that are missing the seconds field and the microseconds field
-    for i in range(len(message_list)):
-        missing_dates.append(re.search("datetime.datetime\(\d*,\d*,\d*,\d*,\d*\)", message_list[i]))
-
-    # intialize and empty list to store the messages that are missing a date field
-    offending_messages = []
-    offending_messages_index = []
-
-    # this for loop will tell you which messages are missing a date by their index
-    for i in range(len(missing_dates)):
-        if type(missing_dates[i]) == re.Match:
-            offending_messages.append(message_list[i])
-            offending_messages_index.append(int(i))
-            print('This message is missing a date: (index number = ' + str(i) + ')')
-
-    # these are the offending messages
-    print(offending_messages)
-    print(offending_messages_index)
-
-    # intialize an empty list to store the offending messages that have zeros added
-    # the zeros are so that when we go to evaluate the date expression
-    # it doesn't fail because their are uneven number of inputs
-    # dates that are missing a field have 6 inputs
-    # dates that aren't missing a field have 7 inputs
-    offending_messages_add_zeros = []
-
-    for i in range(len(offending_messages)):
-        offending_messages_add_zeros.append(re.sub(pattern="\)", repl=",00000)", string=offending_messages[i]))
-
-    print(offending_messages_add_zeros)
-
-    for i in range(len(offending_messages)):
-        message_list[offending_messages_index[i]] = offending_messages_add_zeros[i]
-
-    # reinitialize an empty list to overwrite the list with the bad date
-    regex_search = []
-
-    # rerun the error message to check if our solution worked
-    # important: the output from this for loop will be used to extract the date expressions
-    # TODO treat this like an error message rather than a way to extract date expressions
-    for i in range(len(message_list)):
-        regex_search.append(re.search("datetime.datetime\(\d*,\d*,\d*,\d*,\d*,\d*,\d*\)", message_list[i]))
-        if type(regex_search[i]) == re.Match:
-            print("RegEx match")
-        elif type(regex_search[i]) != re.Match:
-            warnings.warn('Not a match: (index number = ' + str(i) + ')' + ' ' + message_list[i])
-            offending_message = message_list[i]
-            index = int(i)
-            break
-
-    # check the output in the console
-    print(regex_search)
 
     # initialize an empty list to store the unevaluated date expressions
     date_expressions = []
