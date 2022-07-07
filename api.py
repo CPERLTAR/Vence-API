@@ -297,7 +297,7 @@ for i in range(len(dates_to_call) - window_size + 1):
 
     # initialize an empty list to store the unevaluated date expressions
     date_expressions = []
-    # TODO this breaks when then seconds parameter is missing, I fixed it for microseconds
+
     # extract just the date expression from the
     for i in range(len(regex_search)):
         date_expressions.append(regex_search[i].group())
