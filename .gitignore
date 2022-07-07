@@ -3,3 +3,4 @@
 
 # ignore config file
 config/config.json
+*.json
