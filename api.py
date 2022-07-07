@@ -49,15 +49,15 @@ print(json_end_date_datetime)
 
 # TODO I can specify the date input as a sys.arg to accept inputs from the command line interface
 # specify your start time here in the format Year,Month,Day,Hour,Minute,Seconds,Microseconds
-my_start_date_datetime = datetime.datetime(2022, 4, 2, 0, 0, 0, 000)
-print(my_start_date_datetime)
+# json_start_date_datetime = datetime.datetime(2022, 7, 5, 0, 0, 0, 000)
+# print(json_start_date_datetime)
 
 # specify your end time here in the format Year,Month,Day,Hour,Minute,Second(s,Microseconds
-my_end_date_datetime = datetime.datetime(2022, 4, 3, 0, 0, 0, 000)
-print(my_end_date_datetime)
+# json_end_date_datetime = datetime.datetime(2022, 7, 6, 0, 0, 0, 000)
+# print(json_end_date_datetime)
 
 # compare the difference in time between the start and end dates
-time_difference_days = (my_end_date_datetime - my_start_date_datetime).days
+time_difference_days = (json_end_date_datetime - json_start_date_datetime).days
 # print the total time difference (in days) between the start and end dates
 print(time_difference_days)
 
@@ -66,22 +66,22 @@ print(time_difference_days)
 # print(intermediate_end_date_datetime)
 
 # need to split the time delta into 12 hours chunks to be safe (avoid timeout)
-# my_end_date_datetime
+# json_end_date_datetime
 
 time_delta = datetime.timedelta(days = 0.5)
 
 print(time_delta)
 
-print(my_start_date_datetime + time_delta)
+print(json_start_date_datetime + time_delta)
 
 # initialize an empty list to store our list of dates to feed to the API
-dates_to_call = [my_start_date_datetime]
+dates_to_call = [json_start_date_datetime]
 
 print(dates_to_call)
 
-date = my_start_date_datetime
+date = json_start_date_datetime
 
-while(date < my_end_date_datetime):
+while(date < json_end_date_datetime):
     print("iteration", date)
     date = date + time_delta
     dates_to_call.append(date)
@@ -629,14 +629,14 @@ for i in range(len(dates_to_call) - window_size + 1):
 
 # create a filename based on the date range you specified for the HTTP request
 # convert the datetime object to a string but use a more friendly format for filenames
-my_start_date_filename = my_start_date_datetime.strftime("%Y-%m-%d")
+my_start_date_filename = json_start_date_datetime.strftime("%Y-%m-%d")
 print(my_start_date_filename)
 
-my_end_date_datetime = my_end_date_datetime.strftime("%Y-%m-%d")
-print(my_end_date_datetime)
+json_end_date_filename = json_end_date_datetime.strftime("%Y-%m-%d")
+print(json_end_date_filename)
 
 # concatenate strings to create a flexible filename
-filename = "data/" + my_start_date_filename + "_" + my_end_date_datetime + "_Vence-message-data" + ".csv"
+filename = "data/" + my_start_date_filename + "_" + json_end_date_filename + "_Vence-message-data" + ".csv"
 
 # check if the "data" directory exists,
 # if it does not, create new directory
