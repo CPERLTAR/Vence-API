@@ -45,25 +45,12 @@ print(json_start_date_datetime)
 json_end_date_datetime = datetime.datetime.strptime(json_end_date_string, '%Y-%m-%d %H:%M:%S.%f')
 print(json_end_date_datetime)
 
-# TODO I can either use the JSON config file to pass in a start date and then begin iterating based on that date OR I can basically ignore the dates in the config file and specify my own dates
-
 # TODO I can specify the date input as a sys.arg to accept inputs from the command line interface
-# specify your start time here in the format Year,Month,Day,Hour,Minute,Seconds,Microseconds
-# json_start_date_datetime = datetime.datetime(2022, 7, 5, 0, 0, 0, 000)
-# print(json_start_date_datetime)
-
-# specify your end time here in the format Year,Month,Day,Hour,Minute,Second(s,Microseconds
-# json_end_date_datetime = datetime.datetime(2022, 7, 6, 0, 0, 0, 000)
-# print(json_end_date_datetime)
 
 # compare the difference in time between the start and end dates
 time_difference_days = (json_end_date_datetime - json_start_date_datetime).days
 # print the total time difference (in days) between the start and end dates
 print(time_difference_days)
-
-# intermediate_end_date_datetime = start_date_datetime + datetime.timedelta(days = 0.5)
-
-# print(intermediate_end_date_datetime)
 
 # need to split the time delta into 12 hours chunks to be safe (avoid timeout)
 # json_end_date_datetime
