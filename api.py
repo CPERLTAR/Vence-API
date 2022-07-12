@@ -1,5 +1,6 @@
 # import the "requests" library if you don't already have it installed
 # python -m pip install requests
+# python -m pip install pandas
 
 # load required libraries
 import os
