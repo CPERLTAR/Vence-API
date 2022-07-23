@@ -544,7 +544,7 @@ for i in range(len(dates_to_call) - window_size + 1):
     # fill 'nan' values with 'NA' strings so they're won't be any blank/missing values in the data
     fillna_combined_df = reset_index_combined_df.fillna('NA')
 
-    all_data = all_data.append(fillna_combined_df)
+    all_data = fillna_combined_df
 
     all_data = all_data.reset_index(drop=True)
 
