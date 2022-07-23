@@ -162,7 +162,6 @@ Next, we need to download the [`api.py`](https://github.com/amantaya/Vence-API/b
 
 Go to https://github.com/amantaya/Vence-API and click the <img src="docs/img_31.png" width=10% height=10%> button and then select "Download Zip".
 
-## TODO circle the Download zip in photoshop
 <img src="docs/img_32.png" width=100% height=100%>
 
 *Note:* If you are familiar with Git, you could also use:
