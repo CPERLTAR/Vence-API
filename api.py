@@ -23,6 +23,7 @@ headers["Content-Type"] = "application/json"
 
 # read in the configuration JSON from the project directory
 # this is read in as a dictionary
+# TODO add warning message for incorrect date formatting in JSON
 with open('config/config.json') as file:
     json_config_dict = json.load(file)
 
@@ -544,6 +545,7 @@ for i in range(len(dates_to_call) - window_size + 1):
     # fill 'nan' values with 'NA' strings so they're won't be any blank/missing values in the data
     fillna_combined_df = reset_index_combined_df.fillna('NA')
 
+    # TODO deprecated .append method
     all_data = all_data.append(fillna_combined_df)
 
     all_data = all_data.reset_index(drop=True)
