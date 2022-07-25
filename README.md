@@ -23,7 +23,7 @@ This tutorial assumes you are starting fresh with a new installation of Python, 
 - `Pandas` library
 
 ## Setting Up a Python Environment
-Anaconda (https://www.anaconda.com/) is a free platform for downloading and managing Python environments. Anaconda includes a navigator for selecting different Python environments as well as command line tools for setting up `conda` environments. We will use Anaconda to configure a Python 3.8 environment to run [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py).
+Anaconda (https://www.anaconda.com/) is a free platform for downloading and managing Python environments. Anaconda includes a navigator for selecting different Python environments as well as command line tools for setting up and running `conda` environments. We will use Anaconda to configure a Python 3.8 environment to run [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py).
 
 Supplemental info:
 [What is a Python Environment?](https://docs.conda.io/projects/conda/en/latest/glossary.html#conda-environment)
@@ -66,11 +66,11 @@ Once Anaconda has completed installing, click "Next".
 
 <img src="docs/img_9.png" width=70% height=70%>
 
-You can safely skip the next screen about DataSpell.
+You can safely skip the next screen about DataSpell by clicking "Next".
 
 <img src="docs/img_10.png" width=70% height=70%>
 
-On the next screen, you can leave the tutorial checkboxes checked, or uncheck them if you do not want to follow the tutorials. Then click "Finish".
+On the next screen, you can leave the tutorial checkboxes checked if you want to learn more about Anaconda. Reading these tutorials are not necessary to run [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py). Finally, click "Finish".
 
 <img src="docs/img_11.png" width=70% height=70%>
 
@@ -80,7 +80,7 @@ Next, open the Anaconda Navigator from your Windows Start Menu.
 
 You will see a series of black command prompt windows open and then quickly close. This is normal. Anaconda is running scripts to launch and configure Anaconda.
 
-You also might be prompted to update Anaconda Navigator from a clean install. Updating Anaconda Navigator shouldn't effect your Python (conda) environments. 
+You also might be prompted to update Anaconda Navigator from a clean installation. Updating Anaconda Navigator shouldn't affect your Python (conda) environments. 
 
 <img src="docs/img_13.png" width=100% height=100%>
 
