@@ -31,126 +31,126 @@ Supplemental info:
 ### Downloading Anaconda
 Download (https://www.anaconda.com/) the Anaconda distribution appropriate for your operating system. Anaconda is available for Windows, MacOS, and Linux. 
 
-<img src="docs/img_1.png"  width=50% height=50%>
+<img src="docs/img_1.png"  width=100% height=100%>
 
 ### Installing Anaconda on Windows
 Open the Anaconda installer from your "Downloads" folder.
 
-Supplemental info:
-[Installing Anaconda](https://docs.anaconda.com/anaconda/install/)
-
-<img src="docs/img_2.png"  width=50% height=50%>
+<img src="docs/img_2.png"  width=100% height=100%>
 
 Click "Next" to proceed with installation.
 
-<img src="docs/img_3.png"  width=50% height=50%>
+<img src="docs/img_3.png"  width=70% height=70%>
 
 Click "I Agree" to agree to the Licensing agreement.
 
-<img src="docs/img_4.png"  width=50% height=50%>
+<img src="docs/img_4.png"  width=70% height=70%>
 
-Then select the installation type. If you have adminstrator privelages for your computer, you can select "All Users", otherwise select "Just Me".
+Then select the installation type. If you have administrator privileges for your computer, you can select "All Users", otherwise select "Just Me".
 
-<img src="docs/img_5.png"  width=50% height=50%>
+<img src="docs/img_5.png"  width=70% height=70%>
 
 Select where you want to install Anaconda on your computer. The default location is usually fine. 
 
-<img src="docs/img_6.png" width=50% height=50%>
+<img src="docs/img_6.png" width=70% height=70%>
 
 **Advanced Options:** You can set Anaconda as your default Python version for your computer. It is checked by default. You can also add Anaconda to your PATH environment variable, but this is not recommended. Once you have selected your options, click "Install" to install Anaconda on your computer. 
 
-<img src="docs/img_7.png" width=50% height=50%>
+<img src="docs/img_7.png" width=70% height=70%>
 
 Anaconda will begin installing all of required dependencies: packages and scripts required to run Anaconda.
 
-<img src="docs/img_8.png" width=50% height=50%>
+<img src="docs/img_8.png" width=70% height=70%>
 
 Once Anaconda has completed installing, click "Next".
 
-<img src="docs/img_9.png" width=50% height=50%>
+<img src="docs/img_9.png" width=70% height=70%>
 
 You can safely skip the next screen about DataSpell.
 
-<img src="docs/img_10.png" width=50% height=50%>
+<img src="docs/img_10.png" width=70% height=70%>
 
 On the next screen, you can leave the tutorial checkboxes checked, or uncheck them if you do not want to follow the tutorials. Then click "Finish".
 
-<img src="docs/img_11.png" width=50% height=50%>
+<img src="docs/img_11.png" width=70% height=70%>
 
 Next, open the Anaconda Navigator from your Windows Start Menu.
 
-<img src="docs/img_12.png" width=50% height=50%>
+<img src="docs/img_12.png" width=70% height=70%>
 
 You will see a series of black command prompt windows open and then quickly close. This is normal. Anaconda is running scripts to launch and configure Anaconda.
 
 You also might be prompted to update Anaconda Navigator from a clean install. Updating Anaconda Navigator shouldn't effect your Python (conda) environments. 
 
-<img src="docs/img_13.png" width=50% height=50%>
+<img src="docs/img_13.png" width=100% height=100%>
 
 You don't have to open Anaconda every time you want to run a Python script. Anaconda comes with a Python console called "Anaconda Prompt" that you can use to run Python scripts without launching Anaconda Navigator or an Integrated Development Environment (IDE) like PyCharm, Spyder, or R Studio.
+
+More information:
+[Installing Anaconda](https://docs.anaconda.com/anaconda/install/)
 
 ### Creating A *conda* Environment
 [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py) requires Python 3.8 and several libraries (packages) to be installed to function properly. We will be using Anaconda to create a Python environment with the correct version of Python and the required dependencies.
 
 Click on the <img src="docs/img_14.png" width=20% height=20%> button on the left side of Anaconda Navigator to go the "Environments" page.
 
-<img src="docs/img_15.png" width=50% height=50%>
+<img src="docs/img_15.png" width=100% height=100%>
 
 Click the "Create" <img src="docs/img_17.png" width=10% height=10%> button to create a new *conda* environment. 
 
-<img src="docs/img_16.png" width=50% height=50%>
+<img src="docs/img_16.png" width=100% height=100%>
 
 A window called "Create new environment" will open. Set the name of the new Python environment to `py38-vf` . This is an abbreviation for Python version 3.8 and virtual fence. We will configure this *conda* environment with correct version of Python (3.8). `py38-vf` is the name of the *conda* environment. 
 
-<img src="docs/img_18.png" width=50% height=50%>
+<img src="docs/img_18.png" width=100% height=100%>
 
 Under the "Packages" drop-down menu, select Python **3.8.13**
 
-<img src="docs/img_19.png" width=50% height=50%>
+<img src="docs/img_19.png" width=100% height=100%>
 
 Then click "Create". 
 
 Once Anaconda has finished creating the new environment, you should see a new option called `py38-vf`. Anaconda installed a few commonly used packages inside of this environment.
 
-<img src="docs/img_20.png" width=50% height=50%>
+<img src="docs/img_20.png" width=100% height=100%>
 
 ### Installing Required Packages
 
-<img src="docs/img_21.png" width=50% height=50%>
+<img src="docs/img_21.png" width=100% height=100%>
 
 We will install the required packages using Anaconda Navigator. First, change the "Installed" dropdown menu to "All".
 
-<img src="docs/img_22.png" width=50% height=50%>
+<img src="docs/img_22.png" width=100% height=100%>
 
 Then search for "requests" in the "Search Packages" search box and click the checkbox next to the "requests" package. *Note: leave the checkbox checked next to the "requests" package.*
 
-<img src="docs/img_23.png" width=50% height=50%>
+<img src="docs/img_23.png" width=100% height=100%>
 
 Next, search for "pandas" in the search box and click the checkbox next to the "pandas" package. You should now see "2 packages selected" along the bottom. Then click "Apply".
 
-<img src="docs/img_24.png" width=50% height=50%>
+<img src="docs/img_24.png" width=100% height=100%>
 
 A new window called "Install Packages" will open indicating that 27 packages will be installed. 
 
-*Note:* You may be wondering why there are more than 27 packages being installed when we selected only 2 packages. Each package relies on (sometimes many) other packages to function properly, collectively these are called **dependencies**.
+*Note:* You may be wondering why there are ~27 packages being installed when we selected only 2 packages. Each package relies on (sometimes many) other packages to function properly, collectively these are called **dependencies**.
 
 Click "Apply" to install all of the required packages.
 
-<img src="docs/img_26.png" width=50% height=50%>
+<img src="docs/img_26.png" width=100% height=100%>
 
 Once the packages have finished installing, you can launch a Python console or terminal using the <img src="docs/img_28.png" width=10% height=10%> button. 
 
-<img src="docs/img_27.png" width=50% height=50%>
+<img src="docs/img_27.png" width=100% height=100%>
 
 We will use the "Open Terminal" option.
 
-<img src="docs/img_29.png" width=50% height=50%>
+<img src="docs/img_29.png" width=100% height=100%>
 
 A command prompt window will open with the correct Python environment `py38-vf` already activated. 
 
-<img src="docs/img_30.png" width=50% height=50%>
+<img src="docs/img_30.png" width=100% height=100%>
 
-*Note:* Because we launched this Python environment from Anaconda Navigator, we are already inside of the correct Python environment `py38-vf`. If you launch Anaconda Prompt, you will have to use:
+*Note:* Because we launched this Python environment from Anaconda Navigator, we are already inside of the correct Python environment `py38-vf`. If you launch Anaconda Prompt, you will need to activate `conda` environment:
 
 ```shell
 conda activate py38-vf
@@ -187,7 +187,7 @@ Inside of this folder is the `api.py` Python script, as well as configuration fi
 
 ## Configuring Username and Password
 
-Inside of the `config` folder you there is a file called `config.json` . Open this file inside of text editor such as Notepad or the excellent and free Notepad++ (https://notepad-plus-plus.org/). Do not use Microsoft Word, as Word will insert special characters causing the file to be incorrectly formatted.
+Inside of the `config` folder you there is a file called `config.json` . Open this file inside of a text editor, such as Notepad (Windows) or the excellent and free Notepad++ (https://notepad-plus-plus.org/). Do not use Microsoft Word, as Word will likely cause the file to be incorrectly formatted.
 
 <img src="docs/img_36.png" width=100% height=100%>
 
@@ -240,7 +240,7 @@ python api.py
 
 The script `api.py` will loop through the date range supplied in the `config.json` file in 12 hour intervals (to prevent server timeout errors). Each iteration of the loop will print the start and end dates for that interation, as well as printing an HTTP status code which may be helpful for diagnosing server errors. 
 
-Additionally, if any messages are missing a date or time value, `api.py` will print out an index indicating which messages are missing a date or time value. Data missing seconds or microseconds will be fixed by replacing the missing values with zeros. The script will fail and print an error message if any dates or times are missing values for the year, month, day, hour or minutes.  
+Additionally, if any messages are missing a date or time value, `api.py` will print out an index indicating which messages are missing a date or time value. Messages missing seconds or microseconds will be fixed by replacing the missing values with zeros. The script will fail and print an error message if any dates or times are missing values for the year, month, day, hour or minutes.  
 
 <img src="docs/img_39.png" width=100% height=100%>
 
