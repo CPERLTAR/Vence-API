@@ -1,5 +1,9 @@
 # API for Accessing Virtual Fence Data
 
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
 This repo contains Python scripts and configuration files for accessing virtual fence data from the Vence Corporation. This API is written and maintained by a third-party and no warranty or responsibility is implied for or by the Vence Corporation. You are free to modify the code as you see fit (see LICENSE).
 
 ## Who Can Access Data?
