@@ -262,4 +262,4 @@ Data is written to a CSV file in your current working directory (e.g. **C:/Users
 
 Nathan Jero has kindly supplied a Google Doc which defines the meaning of each column in the CSV file.
 
-[Vence_V2_collar_data.docx](docs/Vence_V2_collar_data.docx)
+[Vence_V2_collar_data.docx](https://docs.google.com/document/d/1mSkW57wWF59D9fOm_tbnTVByqaYR4UnV/edit)
