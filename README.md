@@ -124,7 +124,9 @@ We will install the required packages using Anaconda Navigator. First, change th
 
 <img src="docs/img_22.png" width=100% height=100%>
 
-Then search for "requests" in the "Search Packages" search box and click the checkbox next to the "requests" package. *Note: leave the checkbox checked next to the "requests" package.*
+Then search for "requests" in the "Search Packages" search box and click the checkbox next to the "requests" package. 
+
+*Note: leave the checkbox checked next to the "requests" package.*
 
 <img src="docs/img_23.png" width=100% height=100%>
 
@@ -138,7 +140,7 @@ A new window called "Install Packages" will open indicating that 27 packages wil
 
 Click "Apply" to install all of the required packages.
 
-<img src="docs/img_26.png" width=100% height=100%>
+<img src="docs/img_26.png" width=70% height=70%>
 
 Once the packages have finished installing, you can launch a Python console or terminal using the <img src="docs/img_28.png" width=10% height=10%> button. 
 
