@@ -13,21 +13,21 @@ This repo contains Python scripts and configuration files for accessing virtual 
   - *Note: this username and password is different from the username and password you use to access HerdManager*
 - Limited to accessing data from your customer account only
 
-This API allows one-way access of data meaning you can pull data but you cannot modify the data inside of the Vence database. 
+This API allows one-way access of data- you can pull data, but you cannot modify the data inside of the Vence database. 
 
 ## What It Does
-The Python script [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py) will request message data from virtual fence collars from your customer account based on a start and end date. The start date and end date is configured in the [`config.json`](https://github.com/amantaya/Vence-API/blob/main/config/config.json) file.  
+The Python script [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py) will request message data from virtual fence collars between a start and end date. The start date and end date is configured in the [`config.json`](https://github.com/amantaya/Vence-API/blob/main/config/config.json) file. It will then parse the message data, and it will detect/correct some errors related to missing date values. It then writes out a CSV file with "cleaned" data to your current working directory.
 
-## How to Set It Up
+## Installation
 This tutorial assumes you are starting fresh with a new installation of Python, and doesn't require any experience with coding in Python.  
 
-## Requirements
-- Python >3.8 
+### Requirements
+- Python > 3.8 
 - `Requests` library 
 - `Pandas` library
 
-## Setting Up a Python Environment
-Anaconda (https://www.anaconda.com/) is a free platform for downloading and managing Python environments. Anaconda includes a navigator for selecting different Python environments as well as command line tools for setting up and running `conda` environments. We will use Anaconda to configure a Python 3.8 environment to run [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py).
+### Setting Up a Python Environment
+Anaconda (https://www.anaconda.com/) is a free platform for downloading and managing Python environments. Anaconda includes a navigator for selecting different Python environments as well as command line tools for setting up and running `conda` environments. We will use Anaconda Navigator to configure a Python 3.8 environment to run [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py).
 
 Supplemental info:
 [What is a Python Environment?](https://docs.conda.io/projects/conda/en/latest/glossary.html#conda-environment)
@@ -158,11 +158,15 @@ A command prompt window will open with the correct Python environment `py38-vf` 
 conda activate py38-vf
 ```
 
-## Downloading the `api.py` Python script
+## Running the Code to Get Data
+
+### Downloading the Python script
 
 Next, we need to download the [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py) script and place it inside our current working directory.
 
-Go to https://github.com/amantaya/Vence-API and click the <img src="docs/img_31.png" width=15% height=15%> button and then select "Download Zip".
+Go to https://github.com/amantaya/Vence-API click the <img src="docs/img_31.png" width=15% height=15%> button.
+
+Then select "Download Zip".
 
 <img src="docs/img_32.png" width=100% height=100%>
 
@@ -171,11 +175,9 @@ Go to https://github.com/amantaya/Vence-API and click the <img src="docs/img_31.
 git clone https://github.com/amantaya/Vence-API.git
 ```
 
-Next, move the **Vence-API-main.zip** file from your "Downloads" folder to a better location on your computer, such as your "Users" folder, e.g.,
+Next, move the **Vence-API-main.zip** file from your "Downloads" folder to a better location on your computer, such as your "Users" folder, 
 
-**C:\Users\andre**
-
-The important thing is to note *where* the .zip file is on your computer.
+e.g. **C:\Users\andre**
 
 Next, uncompress (unzip) the downloaded code by double-clicking on the .zip file and using the built-in Windows utility, or with a free utility like 7zip (https://www.7-zip.org/).
 
@@ -187,31 +189,31 @@ Inside of this folder is the [`api.py`](https://github.com/amantaya/Vence-API/bl
 
 <img src="docs/img_35.png" width=100% height=100%>
 
-## Configuring Username and Password
+### Configuring Your Username and Password
 
 Inside of the `config` folder you there is a file called `config.json` . Open this file inside of a text editor, such as Notepad (Windows) or the excellent and free Notepad++ (https://notepad-plus-plus.org/). Do not use Microsoft Word, as Word will likely cause the file to be incorrectly formatted.
 
 <img src="docs/img_36.png" width=100% height=100%>
 
-Under "customer", type in the customer value supplied to you by your Vence representative.
+Under "**customer**", type in the customer value supplied to you by your Vence representative.
 
-Under "dbuser", type in the database user supplied to you by your Vence representative.
+Under "**dbuser**", type in the database user supplied to you by your Vence representative.
 
-Under "dbpassword", type in the password supplied to you by your Vence representative. 
+Under "**dbpassword**", type in the password supplied to you by your Vence representative. 
 
-**Note: This username and password is different from the username and password you use to access HerdManager.**
+*Note: This username and password is different from the username and password you use to access HerdManager.*
 
 <img src="docs/img_41.png" width=100% height=100%>
 
 *Before* we save and close `config.json`, we will also edit the start and end dates. 
 
-## Configuring the Start and End Dates
+### Configuring the Start and End Dates
 
-The start and end dates in the `config.json` are the start and end date that you want to pull data from. Editing these dates and times will pull a different date range for the data. 
-
-Inside of a text editor, edit the "start_time" to the date and time where you would like the data to start. The date-time is in the format **Year-Month-Day Hour:Minute:Seconds** in the 24-hour format. Be sure to preserve this formatting exactly (keep all of the dashes, spaces, and colons) or the script will likely fail.  
+Inside of a text editor, edit the "start_time" to the date and time where you would like the data to start. The date/time is in the format **Year-Month-Day Hour:Minute:Seconds.Microseconds** in the 24-hour format. Be sure to preserve this formatting exactly (keep all of the dashes, spaces, and colons) or the script will likely fail.  
 
 Also edit the "end_time" to date and time you want the data to end.
+
+Editing these dates and times will pull a different date range for the data.
 
 **Note: Pulling a large date range from the API _should_ work, but may take several minutes to process based on the speed of your internet connection, processor, and the number of virtual fence collars you have in your database.**
 
@@ -221,7 +223,7 @@ This `config.json` is configured to pull data from 2022-06-01 00:00:00.000 (June
 
 Once you have made your desired edits to `config.json`, save the file and close the text editor.
 
-## Running the Python script
+### Running the Python script
 
 Before we can run [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py) we first need to change our current working directory to inside the `Vence-API-main` folder. 
 
