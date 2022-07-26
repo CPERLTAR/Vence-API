@@ -18,7 +18,7 @@ This API allows one-way access of data- you can pull data, but you cannot modify
 ## What It Does
 The Python script [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py) will request message data from virtual fence collars between a start and end date. The start date and end date is configured in the [`config.json`](https://github.com/amantaya/Vence-API/blob/main/config/config.json) file. It will then parse the message data, and it will detect/correct some errors related to missing date values. It then writes out a CSV file with "cleaned" data to your current working directory.
 
-## Installation
+## Installation on Windows (MacOS instructions coming soon!)
 This tutorial assumes you are starting fresh with a new installation of Python, and doesn't require any experience with coding in Python.  
 
 ### Requirements
