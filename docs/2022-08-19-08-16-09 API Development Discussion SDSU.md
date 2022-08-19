@@ -1,7 +1,8 @@
 # 2022-08-19-08-16-09 API Development Discussion SDSU
 Created: 2022-08-19 08:16:09
 
-- [ ] #task figure out if the string returned is datetime.datetime() is UTC or if is a local time zone
+- [x] #task figure out if the string returned is datetime.datetime() is UTC or if is a local time zone
+	datetimes from API are in UTC
 - [ ] #task Google Collab notebook for the API script
 - [ ] #task write the API data to a Google Drive from a Jupyter Notebook
 - [ ] #task look into scheduling the API to run either via Google Collab or AWS Lambda
