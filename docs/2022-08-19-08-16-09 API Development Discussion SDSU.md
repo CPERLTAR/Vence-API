@@ -17,6 +17,7 @@ Created: 2022-08-19 08:16:09
 - [ ] #task take a look at the offending messages from Jamie that has a column mis-match problem and figure out what went wrong. Figure out how to safely handle mismatch. Write data to separate df? Fill in missing values as NA?
 - [ ] #task fix deprecation warning for Pandas pd.concat() 
 - [ ] #task re-writing or reducing the number of objects created during cleaning process
+- [ ] #task joining eartag data to collar id (Device EUI) to add identification for individuals
 
 ## Tags
 #dev #api
