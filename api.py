@@ -24,6 +24,8 @@ headers["Content-Type"] = "application/json"
 # read in the configuration JSON from the project directory
 # this is read in as a dictionary
 # TODO add warning message for incorrect date formatting in JSON
+# TODO add validation for date input if date range is not valid, return error message
+# incorrect date range are returning empty csv file
 with open('config/config.json') as file:
     json_config_dict = json.load(file)
 
@@ -41,16 +43,18 @@ json_start_date_datetime = datetime.datetime.strptime(json_start_date_string, '%
 # convert the end date string into a datetime object
 json_end_date_datetime = datetime.datetime.strptime(json_end_date_string, '%Y-%m-%d %H:%M:%S.%f')
 
-# TODO I can specify the date input as a sys.arg to accept inputs from the command line interface
-
 # compare the difference in time between the start and end dates
 time_difference_days = (json_end_date_datetime - json_start_date_datetime).days
 
 # need to split the time delta into 12 hours chunks to be safe (avoid timeout)
 # json_end_date_datetime
 
+# TODO can we tune the timedelta to optimize the amount data that is returned from each request?
+# pass in a vector or list of values for the timedelta
 time_delta = datetime.timedelta(days = 0.5)
 
+# TODO add retry if return is bad, wait X amount of time and then retry
+# after y amount of retries
 # initialize an empty list to store our list of dates to feed to the API
 dates_to_call = [json_start_date_datetime]
 
@@ -306,6 +310,8 @@ for i in range(len(dates_to_call) - window_size + 1):
     DeviceStatusIndication = []
 
     # TODO this could be more efficient if I created groups of each message type based on the element length
+    # TODO search through each message type to look for phrase/keyword that is unique
+
     # separate each message type by the number elements in each list
     for element in message_list_split:
         if len(element) == 10:
@@ -554,7 +560,6 @@ for i in range(len(dates_to_call) - window_size + 1):
 # convert the datetime object to a string but use a more friendly format for filenames
 start_date_filename = json_start_date_datetime.strftime("%Y-%m-%d")
 
-
 end_date_filename = json_end_date_datetime.strftime("%Y-%m-%d")
 
 # concatenate strings to create a flexible filename
@@ -575,5 +580,6 @@ if not os.path.isdir(path):
 # print in the console to check the filename string
 print(filename)
 
+# TODO print a message with successful file out saying where the file has been saved
 # write out the data frame as a csv file using the flexible filename convention
 all_data.to_csv(filename)
