@@ -3,5 +3,10 @@
 
 # ignore config file
 config/config.json
-*.json
-config/config.json
+
+# ignore Obsidian workspace
+.obsidian/workspace
+*.obsidian
+
+# ignore PyCharm workspace
+.idea/workspace.xml
