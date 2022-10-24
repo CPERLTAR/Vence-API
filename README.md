@@ -213,7 +213,7 @@ Under "**dbpassword**", type in the password supplied to you by your Vence repre
 
 Inside of a text editor, edit the "start_time" to the date and time where you would like the data to start. The date/time is in the format **Year-Month-Day Hour:Minute:Seconds.Microseconds** in the 24-hour format. Be sure to preserve this formatting exactly (keep all of the dashes, spaces, and colons) or the script will likely fail.  
 
->**Important**
+>**Warning**
 > 
 > Dates and times are stored in UTC (Coordinated Universal Time) in the database. Dates and times entered in the `config.json` file are in UTC. This might affect that date range of data you want to pull. For example, Arizona is -7 hours from UTC, entering "2022-06-01 00:00:00.000" into the `config.json` will pull data from 2022-05-30 17:00:00.000 Arizona local time.
 
@@ -260,7 +260,7 @@ Known issue: [`api.py`](https://github.com/amantaya/Vence-API/blob/main/api.py) 
 
 Data is written to a CSV file in your current working directory (e.g. **C:/Users/andre/Vence-API-main**) inside of a new folder called "data". The file is named with the start and end date of the data, which we specified in the `config.json`.
 
->**Important**
+>**Warning**
 > 
 > The "Datetime" column in the CSV file is written out as a string in UTC (Coordinated Universal Time) **Not in Local Time**. Please keep in mind that you will likely need to adjustment the "Datetime" column by setting a timezone when analyzing data. For example, Arizona is -7 hours relative to UTC, so all dates/times are adjusted to local time by -7 hours.
 
