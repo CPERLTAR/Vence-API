@@ -215,7 +215,7 @@ Inside of a text editor, edit the "start_time" to the date and time where you wo
 
 >**Warning**
 > 
-> Dates and times are stored in UTC (Coordinated Universal Time) in the database. Dates and times entered in the `config.json` file are in UTC. This might affect that date range of data you want to pull. For example, Arizona is -7 hours from UTC, entering "2022-06-01 00:00:00.000" into the `config.json` will pull data from 2022-05-31 17:00:00.000 Arizona local time.
+> Dates and times are stored in UTC (Coordinated Universal Time) in the database. Dates and times entered in the `config.json` file are in UTC. This might affect the date range of data you want to pull. For example, Arizona is -7 hours from UTC, entering "2022-06-01 00:00:00.000" into the `config.json` will pull data from 2022-05-31 17:00:00.000 Arizona local time.
 
 Also edit the "end_time" to date and time you want the data to end.
 
@@ -262,7 +262,16 @@ Data is written to a CSV file in your current working directory (e.g. **C:/Users
 
 >**Warning**
 > 
-> The "Datetime" column in the CSV file is written out as a string in UTC (Coordinated Universal Time) **Not in Local Time**. Please keep in mind that you will likely need to adjustment the "Datetime" column by setting a timezone when analyzing data. For example, Arizona is -7 hours relative to UTC, so all dates/times are adjusted to local time by -7 hours.
+> The "Datetime" column in the CSV file is written out as a string in UTC (Coordinated Universal Time) **Not in Local Time**. Please keep in mind that you will likely need to adjustment the "Datetime" column by setting a timezone when analyzing data. For example, Arizona is -7 hours relative to UTC, so all dates/times are adjusted to local time by subtracting 7 hours from the "Datetime" column. Also keep in mind how Daylight Savings Time might affect the dates/times "Datetime" column.
+
+>**Note**
+> 
+> I would recommend using the `dplyr` package and the function `with_tz()` to convert the Datetime column to your local time,
+> e.g.
+> ```R
+> # convert Datetime column to Arizona local time
+> dplyr::with_tz(df$Datetime, tz = "US/Arizona")
+> ```
 
 <img src="docs/img_40.png" width=100% height=100%>
 
