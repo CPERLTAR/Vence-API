@@ -262,7 +262,7 @@ Data is written to a CSV file in your current working directory (e.g. **C:/Users
 
 >**Warning**
 > 
-> The "Datetime" column in the CSV file is written out as a string in UTC (Coordinated Universal Time) **Not in Local Time**. Please keep in mind that you will likely need to adjustment the "Datetime" column by setting a timezone when analyzing data. For example, Arizona is -7 hours relative to UTC, so all dates/times are adjusted to local time by subtracting 7 hours from the "Datetime" column. Also keep in mind how Daylight Savings Time might affect the dates/times "Datetime" column.
+> The "Datetime" column in the CSV file is written out as a string in UTC (Coordinated Universal Time) **Not in Local Time**. Please keep in mind that you will likely need to adjust the "Datetime" column by converting to a timezone when analyzing data. For example, Arizona is -7 hours relative to UTC, so all dates/times are adjusted to local time by subtracting 7 hours from the "Datetime" column. Also keep in mind how Daylight Savings Time might affect the dates/times in the "Datetime" column.
 
 >**Note**
 > 
