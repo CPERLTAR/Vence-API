@@ -215,7 +215,7 @@ Inside of a text editor, edit the "start_time" to the date and time where you wo
 
 >**Warning**
 > 
-> Dates and times are stored in UTC (Coordinated Universal Time) in the database. Dates and times entered in the `config.json` file are in UTC. This might affect that date range of data you want to pull. For example, Arizona is -7 hours from UTC, entering "2022-06-01 00:00:00.000" into the `config.json` will pull data from 2022-05-30 17:00:00.000 Arizona local time.
+> Dates and times are stored in UTC (Coordinated Universal Time) in the database. Dates and times entered in the `config.json` file are in UTC. This might affect that date range of data you want to pull. For example, Arizona is -7 hours from UTC, entering "2022-06-01 00:00:00.000" into the `config.json` will pull data from 2022-05-31 17:00:00.000 Arizona local time.
 
 Also edit the "end_time" to date and time you want the data to end.
 
