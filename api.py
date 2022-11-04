@@ -75,6 +75,9 @@ window_size = 2
 # dates_to_call[0: 0 + window_size][0]
 # dates_to_call[0: 0 + window_size][1]
 
+# initialize an empty string to hold the combined responses from each call to the API
+combined_response_text = ''
+
 for i in range(len(dates_to_call) - window_size + 1):
     # the time difference in and of itself doesn't matter
     # rather its the amount of time it takes the server to respond to with that much data
@@ -115,22 +118,27 @@ for i in range(len(dates_to_call) - window_size + 1):
 
     # index the response variable to get the "content" of the response
     # the response text will work better than response content
+    # TODO decide if message_text variable is necessary or can we leave it as
     message_text = response.text
 
-    # drop the first and last characters from the message so string splitting will create symmetrical messages
-    # first we need to know the length of the message (i.e., number of characters) to create an index
-    message_length = len(message_text)
+    # add the response text from the current iteration to the text from previous iterations of the for loop
+    combined_response_text = combined_response_text + message_text
+
+# TODO this is might be unnecessary and can probably be dropped but first need to check for variable references in script
+# drop the first and last characters from the message so string splitting will create symmetrical messages
+# first we need to know the length of the message (i.e., number of characters) to create an index
+message_length = len(message_text)
 
     # stop execution if the http response is empty but status code is 200
     # for whatever reason, the server returns two braces with nothing inside
     if message_length <= 3:
         sys.exit("Error: Empty Response from Server")
 
-    # TODO instead of creating new variables when cleaning up the message string, just overwrite the message string
+# TODO instead of creating new variables when cleaning up the message string, just overwrite the message string
 
-    # drop the last character of the message which is an extra right brace "]"
-    # this is just an extra unnecessary character
-    message_text_drop_last_char = message_text[0:(message_length - 1)]
+# drop the last character of the message which is an extra right brace "]"
+# this is just an extra unnecessary character
+message_text_drop_last_char = message_text[0:(message_length - 1)]
 
     # drop the first character of the message which is an extra left brace "["
     # this is just an extra unnecessary character
