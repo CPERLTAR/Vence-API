@@ -126,8 +126,6 @@ for i in range(len(dates_to_call) - window_size + 1):
     # add the response text from the current iteration to the text from previous iterations of the for loop
     combined_response_text = combined_response_text + combined_message_text
 
-    print(combined_response_text)
-
 # TODO this is might be unnecessary and can probably be dropped
 #  but first need to check for variable references in script
 # drop the first and last characters from the message so string splitting will create symmetrical messages
