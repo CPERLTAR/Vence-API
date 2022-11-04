@@ -129,11 +129,6 @@ for i in range(len(dates_to_call) - window_size + 1):
 # first we need to know the length of the message (i.e., number of characters) to create an index
 message_length = len(message_text)
 
-    # stop execution if the http response is empty but status code is 200
-    # for whatever reason, the server returns two braces with nothing inside
-    if message_length <= 3:
-        sys.exit("Error: Empty Response from Server")
-
 # TODO instead of creating new variables when cleaning up the message string, just overwrite the message string
 
 # drop the last character of the message which is an extra right brace "]"
