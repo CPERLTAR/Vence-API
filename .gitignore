@@ -9,4 +9,4 @@ config/config.json
 *.obsidian
 
 # ignore PyCharm workspace
-.idea/workspace.xml
+*.idea
