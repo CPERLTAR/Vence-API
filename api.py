@@ -49,8 +49,6 @@ time_difference_days = (json_end_date_datetime - json_start_date_datetime).days
 # need to split the time delta into 12 hours chunks to be safe (avoid timeout)
 # json_end_date_datetime
 
-# TODO add a flag that indicates if the response is empty (and therefore missing data)
-
 # TODO can we tune the timedelta to optimize the amount data that is returned from each request?
 # pass in a vector or list of values for the timedelta
 time_delta = datetime.timedelta(days=0.5)
@@ -123,8 +121,21 @@ for i in range(len(dates_to_call) - window_size + 1):
     # TODO decide if combined_message_text variable is necessary or can we leave it as
     combined_message_text = response.text
 
+    # print an informative message to indicate to users that no data was returned for the date range
+    if combined_message_text == '[]':
+        print("Empty response: No data returned for this date range.")
+
+    # replace the contents of an empty response '[]' with empty string to avoid adding those characters to combined response
+    if combined_message_text == '[]':
+        combined_message_text = re.sub(pattern="\[]", repl="", string=combined_message_text)
+
     # add the response text from the current iteration to the text from previous iterations of the for loop
+    # TODO these variable names are confusing and need to be renamed
     combined_response_text = combined_response_text + combined_message_text
+
+# print error message and exit if no data was returned from date ranges in config file
+if len(combined_response_text) == 0:
+    sys.exit("No data was returned for dates in `config.json`. Exiting.")
 
 # TODO this is might be unnecessary and can probably be dropped
 #  but first need to check for variable references in script
